@@ -1,0 +1,21 @@
+{
+  "name": "ratp-web",
+  "version": "0.0.1",
+  "description": "",
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "angular": "~1.4.2",
+    "angular-animate": "~1.4.2",
+    "angular-route": "~1.4.2",
+    "fontawesome": "~4.3.0",
+    "angular-fontawesome": "~0.3.2",
+    "angular-sanitize": "~1.4.2",
+    "angular-mocks": "~1.4.4",
+    "ngstorage": "~0.3.9",
+    "lodash": "~3.10.1",
+    "angular-strap": "~2.3.3"
+  },
+  "resolutions": {
+    "angular": "~1.4.0"
+  }
+}

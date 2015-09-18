@@ -1,0 +1,14 @@
+<h1 class="h2">Prochains trains RATP</h1>
+<div ng-repeat="station in ctrl.$storage.stations" ng-include="'/app/stops-at-station.html'"></div>
+<div ng-show="!ctrl.$storage.stations.length" class="alert alert-info">
+<p>Aucune station à vérifier.</p>
+</div>
+
+<hr>
+<p>Dernière mise à jour : {{(ctrl.lastUpdated|date:"HH:mm:ss") || "(jamais)"}}</p>
+<p>
+  <button class="btn btn-primary" ng-click="ctrl.getStops()"><i class="fa fa-refresh"></i> Actualiser</button>
+  <button ng-show="ctrl.intervalRef" class="btn btn-default" ng-click="ctrl.stopInterval()">No auto-update</button>
+  <button class="btn btn-danger" ng-click="ctrl.setInterval(15)" ng-show="!ctrl.intervalRef">Auto-update</button>
+  <a class="btn btn-default" href="#/settings"><i class="fa fa-cogs"></i></button>
+</p>
