@@ -1,0 +1,17 @@
+[ng-cloak] { display: none; }
+.stop {
+    min-width: 120px;
+    display: inline-block;
+}
+.stop:not(:last-child) {
+    margin-right: 10px;
+}
+time {
+    font-size: 20px;
+}
+.no-margin-top {
+    margin-top: 0;
+}
+.no-margin-bottom {
+    margin-bottom: 0;
+}
