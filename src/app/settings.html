@@ -1,29 +1,35 @@
 <h1 class="h2">Paramètres</h1>
 
 <h3>Stations à vérifier</h3>
-<div class="panel panel-default" ng-repeat="station in ctrl.$storage.stations">
-  <div class="panel-body">
-    <h4 class="no-margin-top">Ligne {{station.line}} − {{station.name}} <button ng-click="ctrl.removeStation(station)" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></button></h4>
+<ul class="list-group" ng-show="ctrl.$storage.stations.length">
+  <li class="list-group-item" ng-repeat="station in ctrl.$storage.stations">
+    <h4 class="no-margin-top no-margin-bottom">Ligne {{station.line}} − {{station.name}} <button ng-click="ctrl.removeStation(station)" class="btn btn-danger btn-xs pull-right"><i class="fa fa-trash-o"></i></button></h4>
     <p class="no-margin-bottom">Direction <i>{{station.direction}}</i></p>
-  </div>
-</div>
+  </li>
+</ul>
 <p ng-show="!ctrl.$storage.stations.length" class="text-info">Aucune station à vérifier.</p>
 
 <h3>Ajouter une station</h3>
 <form ng-submit="ctrl.addStation(line, direction, station)" name="form">
   <div class="form-group">
     <label for="line">Ligne</label>
-    <input id="line" ng-model="line" type="text" class="form-control" bs-options="option.code as (option.code + ' − ' + option.name) for option in ctrl.lines" placeholder="Choisissez une ligne" bs-typeahead>
+    <input id="line" ng-model="line" type="text" class="form-control" bs-options="option.code as (option.code + ' − ' + option.name) for option in ctrl.lines" placeholder="Tapez le nom d'une ligne" >
   </div>
   <div class="form-group">
     <label for="direction">Direction</label>
-    <select id="direction" class="form-control" ng-required="!direction" ng-model="direction" ng-options="direction.name as direction.name for direction in ctrl.directions" ng-disabled="!line">
-      <option disabled selected>Choisissez une direction</option>
-    </select>
+    <div class="radio" ng-repeat="dir in ctrl.directions">
+      <label class="radio">
+        <input type="radio" name="direction" ng-model="$parent.direction" value="{{dir.name}}"> {{dir.name}}
+      </label>
+    </div>
+    <p class="text-muted" ng-show="!ctrl.directions">Choisissez d'abord une ligne.</p>
   </div>
   <div class="form-group">
     <label for="station">Station</label>
-    <input id="station" ng-model="station" type="text" class="form-control" data-min-length="1" data-auto-select="true" bs-options="option.name as option.name for option in ctrl.stations" placeholder="Choisissez une station" bs-typeahead required ng-disabled="!line">
+    <input id="station" ng-model="station" type="text" class="form-control" data-min-length="1" data-auto-select="true" bs-options="option.name as option.name for option in ctrl.stations" placeholder="Tapez le nom d'une station" bs-typeahead required ng-disabled="!line">
   </div>
   <p><button type="submit" class="btn btn-info btn-block" ng-disabled="form.$invalid"><i class="fa fa-plus"></i> Ajouter</button></p>
 </form>
+<hr>
+<p><a href="#/" class="btn btn-block btn-default"><i class="fa fa-home"></i> Accueil</a></p>
+<br>

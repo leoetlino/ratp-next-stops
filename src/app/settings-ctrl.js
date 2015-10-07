@@ -16,13 +16,17 @@ angular.module("prochainsTrains").controller("SettingsCtrl", function (
     if (!_.findWhere(this.stations, { name: station })) {
       throw new Error("Invalid station");
     }
-    this.$storage.stations.push({ line, direction, name: station });
-    $scope.line = $scope.direction = $scope.station = null;
+    return RatpService.getNextStops(line, direction, station).then(() => {
+      this.$storage.stations.push({ line, direction, name: station });
+      $scope.line = $scope.direction = $scope.station = null;
+    });
   };
   this.lines = [];
   RatpService.getLines().then((lines) => { this.lines = lines; });
   $scope.$watch("line", (lineCode) => {
     if (!lineCode || !_.findWhere(this.lines, { code: lineCode })) {
+      this.directions = null;
+      this.stations = null;
       return;
     }
     RatpService.getDirections(lineCode).then((directions) => { this.directions = directions; });
