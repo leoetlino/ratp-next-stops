@@ -256,7 +256,23 @@ module.exports = function(grunt) {
       build: {
         src: ".tmp/concat/css/app.min.css",
       },
-    }
+    },
+    manifest: {
+      generate: {
+        options: {
+          basePath: "dist/",
+          preferOnline: true,
+          timestamp: true,
+        },
+        src: [
+          "js/*.min.js",
+          "css/*.min.css",
+          "index.html",
+          "fonts/fontawesome-webfont.woff2?v=4.3.0",
+        ],
+        dest: "dist/manifest.appcache"
+      },
+    },
   });
 
   grunt.loadNpmTasks("grunt-rsync");
@@ -287,6 +303,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-include-source");
     grunt.loadNpmTasks("grunt-rsync");
     grunt.loadNpmTasks("grunt-postcss");
+    grunt.loadNpmTasks("grunt-manifest");
     grunt.task.run([
       "test",
       "clean:preBuild", // Clean up to make sure nothing breaks the build
@@ -304,6 +321,7 @@ module.exports = function(grunt) {
       "rev", // Add a revision tag to assets
       "usemin",
       "htmlmin", // Minify the HTML
+      "manifest",
       "clean:postBuild", // Clean up
     ]);
   });
