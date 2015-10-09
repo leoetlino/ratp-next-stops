@@ -1,6 +1,6 @@
 [ng-cloak] { display: none; }
 .stop {
-    min-width: 120px;
+    min-width: 130px;
     display: inline-block;
 }
 .stop:not(:last-child) {
