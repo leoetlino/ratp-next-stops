@@ -263,12 +263,14 @@ module.exports = function(grunt) {
           basePath: "dist/",
           preferOnline: true,
           timestamp: true,
+          cache: [
+            "fonts/fontawesome-webfont.woff2?v=4.3.0",
+          ]
         },
         src: [
           "js/*.min.js",
           "css/*.min.css",
           "index.html",
-          "fonts/fontawesome-webfont.woff2?v=4.3.0",
         ],
         dest: "dist/manifest.appcache"
       },
