@@ -1,6 +1,6 @@
 <h2 class="h3">{{station.name}} <small>vers {{station.direction}}</small></h2>
 <div ng-if="ctrl.stops[station.name + station.direction]">
-  <span ng-repeat="stop in ctrl.stops[station.name + station.direction]" class="stop" ng-class="{'blink': stop.waitingTime < 60, 'text-danger': stop.waitingTime <= 60, 'text-warning': stop.waitingTime <= 300, 'text-info': stop.delayed}">
+  <span ng-repeat="stop in ctrl.stops[station.name + station.direction]" class="stop" ng-class="{'blink': stop.waitingTime < 60 || stop.delayed, 'text-danger': stop.waitingTime <= 60 && !stop.delayed, 'text-warning': stop.waitingTime <= 300 && && !stop.delayed, 'text-info': stop.delayed}">
     <time datetime="{{stop.nextStopTime}}">{{stop.nextStopTime|date:"HH:mm"}}</time>&nbsp;<span class="message">({{stop.message}})</span>
   </span>
 </div>
