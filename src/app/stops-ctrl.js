@@ -12,6 +12,9 @@ angular.module("prochainsTrains").controller("StopsCtrl", function (RatpService,
     });
   };
   this.getStops();
+  this.hasSameDestinationForAllStops = (stops) => {
+    return stops.every(stop => stop.destination === stops[0].destination);
+  };
   this.intervalRef = null;
   this.setInterval = (intervalInSeconds) => {
     if (this.intervalRef) {
