@@ -1,6 +1,7 @@
 [ng-cloak] { display: none; }
 .stop {
-    min-width: 130px;
+    min-width: 140px;
+    max-width: 140px;
     display: inline-block;
 }
 .stop:not(:last-child) {
@@ -8,6 +9,10 @@
 }
 time {
     font-size: 20px;
+}
+.destination {
+    color: gray;
+    font-size: 13px;
 }
 .no-margin-top {
     margin-top: 0;
