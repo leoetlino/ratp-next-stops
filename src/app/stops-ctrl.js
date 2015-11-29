@@ -4,7 +4,7 @@ angular.module("prochainsTrains").controller("StopsCtrl", function (RatpService,
   });
   this.stops = {};
   this.getStops = () => {
-    this.$storage.stations.forEach((station) => {
+    this.$storage.stations.filter(station => !station.disabled).forEach((station) => {
       RatpService.getNextStops(station.line, station.direction, station.name).then((stops) => {
         this.stops[station.name + station.direction] = stops;
         this.lastUpdated = new Date();
