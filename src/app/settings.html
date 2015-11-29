@@ -5,6 +5,9 @@
   <li class="list-group-item" ng-repeat="station in ctrl.$storage.stations">
     <h4 class="no-margin-top no-margin-bottom">Ligne {{station.line}} − {{station.name}} <button ng-click="ctrl.removeStation(station)" class="btn btn-danger btn-xs pull-right"><i class="fa fa-trash-o"></i></button></h4>
     <p class="no-margin-bottom">Direction <i>{{station.direction}}</i></p>
+    <div class="checkbox">
+      <label><input type="checkbox" ng-model="station.disabled"> Désactiver</label>
+    </div>
   </li>
 </ul>
 <p ng-show="!ctrl.$storage.stations.length" class="text-info">Aucune station à vérifier.</p>
