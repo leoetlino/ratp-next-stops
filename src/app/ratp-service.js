@@ -12,21 +12,21 @@ angular.module("prochainsTrains").factory("RatpService", function ($http) {
   };
   return {
     getNextStops(lineCode, directionName, stationName) {
-      return $http.get("http://p.leolam.fr:8800/api/next-stops/line-" + lineCode +
+      return $http.get("https://ratp-api.leolam.fr/api/next-stops/line-" + lineCode +
         "/" + slugify(directionName) +
         "/" + slugify(stationName))
         .then((res) => res.data);
     },
     getStations(lineCode) {
-      return $http.get("http://p.leolam.fr:8800/api/stations/line-" + lineCode)
+      return $http.get("https://ratp-api.leolam.fr/api/stations/line-" + lineCode)
         .then((res) => res.data);
     },
     getLines() {
-      return $http.get("http://p.leolam.fr:8800/api/lines")
+      return $http.get("https://ratp-api.leolam.fr/api/lines")
         .then((res) => res.data);
     },
     getDirections(lineCode) {
-      return $http.get("http://p.leolam.fr:8800/api/directions/line-" + lineCode)
+      return $http.get("https://ratp-api.leolam.fr/api/directions/line-" + lineCode)
         .then((res) => res.data);
     },
   };
