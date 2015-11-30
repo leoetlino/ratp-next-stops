@@ -5,6 +5,7 @@
     <span class="message" ng-class="{'blink': stop.waitingTime < 60 || stop.delayed}">({{stop.message}})</span>&nbsp;
     <span class="destination" ng-show="!ctrl.hasSameDestinationForAllStops(ctrl.stops[station.name + station.direction])"><br>{{stop.destination}}</span>
   </span>
+  <p ng-show="ctrl.stops[station.name + station.direction].length === 0">Aucun train.</p>
 </div>
 <div ng-if="!ctrl.stops[station.name + station.direction] && !station.disabled">
   <span ng-repeat="x in [1, 2, 3, 4]" class="stop">
