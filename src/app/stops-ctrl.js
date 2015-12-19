@@ -3,6 +3,11 @@ angular.module("prochainsTrains").controller("StopsCtrl", function (RatpService,
     stations: [],
   });
   this.stops = {};
+
+  this.hasSameDestinationForAllStops = (stops) => {
+    return stops.every(stop => stop.destination === stops[0].destination);
+  };
+
   this.getStops = () => {
     this.$storage.stations.filter(station => !station.disabled).forEach((station) => {
       RatpService.getNextStops(station.line, station.direction, station.name).then((stops) => {
@@ -12,9 +17,7 @@ angular.module("prochainsTrains").controller("StopsCtrl", function (RatpService,
     });
   };
   this.getStops();
-  this.hasSameDestinationForAllStops = (stops) => {
-    return stops.every(stop => stop.destination === stops[0].destination);
-  };
+
   this.intervalRef = null;
   this.setInterval = (intervalInSeconds) => {
     if (this.intervalRef) {
