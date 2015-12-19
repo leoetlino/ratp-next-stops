@@ -1,5 +1,8 @@
 angular.module("prochainsTrains").factory("RatpService", function ($http) {
   const API_ENDPOINT = "https://ratp-api.leolam.fr/api";
+
+  let cache = {};
+
   let slugify = (string) => {
     if (!string) {
       return "";
@@ -11,24 +14,36 @@ angular.module("prochainsTrains").factory("RatpService", function ($http) {
       .replace(/^-+/, "")
       .replace(/-+$/, "");
   };
+
+  let query = (path, useCache) => {
+    let url = API_ENDPOINT + path;
+    if (useCache && cache[url]) {
+      return cache[url];
+    }
+    let promise = $http.get(url)
+      .then(res => {
+        return res.data;
+      });
+    if (useCache) {
+      cache[url] = promise;
+    }
+    return promise;
+  };
+
   return {
     getNextStops(lineCode, directionName, stationName) {
-      return $http.get(API_ENDPOINT + "/next-stops/line-" + lineCode +
+      return query("/next-stops/line-" + lineCode +
         "/" + slugify(directionName) +
-        "/" + slugify(stationName))
-        .then((res) => res.data);
+        "/" + slugify(stationName));
     },
     getStations(lineCode) {
-      return $http.get(API_ENDPOINT + "/stations/line-" + lineCode)
-        .then((res) => res.data);
+      return query("/stations/line-" + lineCode, true);
     },
     getLines() {
-      return $http.get(API_ENDPOINT + "/lines")
-        .then((res) => res.data);
+      return query("/lines", true);
     },
     getDirections(lineCode) {
-      return $http.get(API_ENDPOINT + "/directions/line-" + lineCode)
-        .then((res) => res.data);
+      return query("/directions/line-" + lineCode, true);
     },
   };
 });
