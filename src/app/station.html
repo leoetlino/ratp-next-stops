@@ -1,0 +1,18 @@
+<h1 class="h2">Prochains passages</h1>
+<h3 ng-style="{color: '#' + ctrl.lineDetails.color}">Ligne {{ctrl.line}}</h3>
+<div ng-if="!ctrl.stationDoesNotExist">
+  <div ng-repeat="station in ctrl.stopAreas" ng-include="'/app/stops-at-station.html'"></div>
+
+  <hr>
+  <p>Dernière mise à jour : {{(ctrl.lastUpdated|date:"HH:mm:ss") || "(jamais)"}}</p>
+  <p>
+    <button class="btn btn-primary" ng-click="ctrl.getStops()"><i class="fa fa-refresh"></i> Actualiser</button>
+  </p>
+</div>
+<div ng-if="ctrl.stationDoesNotExist">
+  <p>La station {{ctrl.station}} n'existe pas.</p>
+</div>
+
+<hr>
+<p><a href="#/" class="btn btn-block btn-default"><i class="fa fa-home"></i> Accueil</a></p>
+<br>

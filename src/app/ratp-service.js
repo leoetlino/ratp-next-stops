@@ -39,8 +39,14 @@ angular.module("prochainsTrains").factory("RatpService", function ($http) {
     getStations(lineCode) {
       return query("/stations/line-" + lineCode, true);
     },
+    getStationsOnDirection(lineCode, direction) {
+      return query(`/stations/line-${lineCode}/${direction}`, true);
+    },
     getLines() {
       return query("/lines", true);
+    },
+    getLineDetails(lineCode) {
+      return query("/lines/" + lineCode, true);
     },
     getDirections(lineCode) {
       return query("/directions/line-" + lineCode, true);
