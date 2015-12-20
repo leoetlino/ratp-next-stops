@@ -1,15 +1,23 @@
 <h1 class="h2">Prochains trains RATP</h1>
-<div ng-repeat="station in ctrl.$storage.stations" ng-include="'/app/stops-at-station.html'"></div>
+
+<next-stops
+  ng-repeat="station in ctrl.$storage.stations"
+  station="station"
+  auto-refresh="ctrl.$storage.autoRefresh"
+  auto-refresh-interval="ctrl.$storage.autoRefreshInterval"
+  on-refreshed="ctrl.setLastUpdated(lastUpdated)"
+></next-stops>
+
 <div ng-show="!ctrl.$storage.stations.length" class="alert alert-info">
 <p>Aucune station à vérifier.</p>
 </div>
 
 <hr>
-<p>Dernière mise à jour : {{(ctrl.lastUpdated|date:"HH:mm:ss") || "(jamais)"}}</p>
+<p>Dernière mise à jour : {{(ctrl.lastUpdated|date:"HH:mm:ss") || "---"}}</p>
 <p>
-  <button class="btn btn-primary" ng-click="ctrl.getStops()"><i class="fa fa-refresh"></i> Actualiser</button>
-  <button ng-show="ctrl.intervalRef" class="btn btn-default" ng-click="ctrl.stopInterval()">No auto-update</button>
-  <button class="btn btn-danger" ng-click="ctrl.setInterval(15)" ng-show="!ctrl.intervalRef">Auto-update</button>
+  <button ng-click="ctrl.refreshStops()" class="btn btn-primary"><i class="fa fa-refresh"></i> Actualiser</button>
+  <button ng-show="ctrl.$storage.autoRefresh" ng-click="ctrl.$storage.autoRefresh = false" class="btn btn-default">No auto-update</button>
+  <button ng-show="!ctrl.$storage.autoRefresh" ng-click="ctrl.$storage.autoRefresh = true" class="btn btn-danger">Auto-update</button>
   <a class="btn btn-default" href="/#/settings"><i class="fa fa-cogs"></i></a>
   <a class="btn btn-info" href="/#/lines">Lignes</a>
 </p>

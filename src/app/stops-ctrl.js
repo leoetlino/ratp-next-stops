@@ -1,36 +1,21 @@
-angular.module("prochainsTrains").controller("StopsCtrl", function (RatpService, $interval, $localStorage) {
+angular.module("prochainsTrains").controller("StopsCtrl", function (
+  $localStorage,
+  $scope
+) {
+
   this.$storage = $localStorage.$default({
     stations: [],
+    autoRefresh: true,
+    autoRefreshInterval: 15,
   });
-  this.stops = {};
+  this.autoRefresh = this.$storage.autoRefresh;
 
-  this.hasSameDestinationForAllStops = (stops) => {
-    return stops.every(stop => stop.destination === stops[0].destination);
+  this.refreshStops = () => {
+    $scope.$broadcast("NextStopsCtrl::refreshStops");
   };
 
-  this.getStops = () => {
-    this.$storage.stations.filter(station => !station.disabled).forEach((station) => {
-      RatpService.getNextStops(station.line, station.direction, station.name).then((stops) => {
-        this.stops[station.name + station.direction] = stops;
-        this.lastUpdated = new Date();
-      });
-    });
+  this.setLastUpdated = (lastUpdated) => {
+    this.lastUpdated = lastUpdated;
   };
-  this.getStops();
 
-  this.intervalRef = null;
-  this.setInterval = (intervalInSeconds) => {
-    if (this.intervalRef) {
-      $interval.cancel(this.intervalRef);
-      this.intervalRef = null;
-    }
-    this.intervalRef = $interval(this.getStops, intervalInSeconds * 1000);
-  };
-  this.stopInterval = () => {
-    if (this.intervalRef) {
-      $interval.cancel(this.intervalRef);
-      this.intervalRef = null;
-    }
-  };
-  this.setInterval(15);
 });

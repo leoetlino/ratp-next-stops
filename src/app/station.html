@@ -1,13 +1,21 @@
 <h1 class="h2">Prochains passages</h1>
 <h3 ng-style="{color: '#' + ctrl.lineDetails.color}">Ligne {{ctrl.line}}</h3>
 <div ng-if="!ctrl.stationDoesNotExist">
-  <div ng-repeat="station in ctrl.stopAreas" ng-include="'/app/stops-at-station.html'"></div>
+  <next-stops
+    ng-repeat="station in ctrl.stopAreas"
+    station="station"
+    auto-refresh="ctrl.autoRefresh"
+    on-refreshed="ctrl.setLastUpdated(lastUpdated)"
+  ></next-stops>
 
   <hr>
   <p>Dernière mise à jour : {{(ctrl.lastUpdated|date:"HH:mm:ss") || "(jamais)"}}</p>
   <p>
-    <button class="btn btn-primary" ng-click="ctrl.getStops()"><i class="fa fa-refresh"></i> Actualiser</button>
+    <button ng-click="ctrl.refreshStops()" class="btn btn-primary"><i class="fa fa-refresh"></i> Actualiser</button>
+    <button ng-show="ctrl.autoRefresh" ng-click="ctrl.autoRefresh = false" class="btn btn-default">No auto-update</button>
+    <button ng-show="!ctrl.autoRefresh" ng-click="ctrl.autoRefresh = true" class="btn btn-danger">Auto-update</button>
   </p>
+
 </div>
 <div ng-if="ctrl.stationDoesNotExist">
   <p>La station {{ctrl.station}} n'existe pas.</p>

@@ -1,38 +1,34 @@
 angular.module("prochainsTrains").controller("StationCtrl", function (
   RatpService,
   lineDetails,
-  $routeParams) {
+  $routeParams,
+  $scope
+) {
 
   this.lineDetails = lineDetails;
   this.line = $routeParams.line;
   this.station = $routeParams.station;
 
   this.stopAreas = [];
-  this.stops = {};
-
-  this.hasSameDestinationForAllStops = (stops) => {
-    return stops.every(stop => stop.destination === stops[0].destination);
-  };
-
   RatpService.getDirections(this.line).then(directions => {
     directions.forEach(direction => {
       this.stopAreas.push({
         name: this.station,
         direction: direction.name,
+        line: this.line,
       });
     });
-    this.getStops();
+    this.refreshStops();
   });
 
-  this.getStops = () => {
-    this.stopAreas.forEach(stopArea => {
-      RatpService.getNextStops(this.line, stopArea.direction, stopArea.name).then((stops) => {
-        this.stops[stopArea.name + stopArea.direction] = stops;
-        this.lastUpdated = new Date();
-      }, (response) => {
-        this.stationDoesNotExist = (response.status === 404);
-      });
-    });
+  this.autoRefresh = true;
+
+  this.refreshStops = () => {
+    $scope.$broadcast("NextStopsCtrl::refreshStops");
+  };
+
+  this.setLastUpdated = (lastUpdated) => {
+    this.lastUpdated = lastUpdated;
   };
 
 });
