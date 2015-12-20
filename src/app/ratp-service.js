@@ -19,7 +19,7 @@ angular.module("prochainsTrains").factory("RatpService", function ($http, normal
           return Promise.reject("Not found");
         }
         if (response.status === 503) {
-          return query(url, useCache);
+          return query(path, useCache);
         }
         return Promise.reject("Unexpected error");
       });
