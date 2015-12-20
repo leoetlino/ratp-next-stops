@@ -13,6 +13,15 @@ angular.module("prochainsTrains").factory("RatpService", function ($http, normal
     let promise = $http.get(url)
       .then(res => {
         return res.data;
+      }, (response) => {
+        cache[url] = null;
+        if (response.status === 404) {
+          return Promise.reject("Not found");
+        }
+        if (response.status === 503) {
+          return query(url, useCache);
+        }
+        return Promise.reject("Unexpected error");
       });
     if (useCache) {
       cache[url] = promise;
