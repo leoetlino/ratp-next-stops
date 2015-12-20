@@ -12,13 +12,8 @@
 <p>Aucune station à vérifier.</p>
 </div>
 
-<br>
-<div class="panel panel-default">
-<div class="panel-body">
-<p>Dernière mise à jour : {{(ctrl.lastUpdated|date:"HH:mm:ss") || "---"}}</p>
-<button ng-click="ctrl.refreshStops()" class="btn btn-primary"><fa name="refresh"></fa> Actualiser</button>
-<button ng-click="ctrl.$storage.autoRefresh = !ctrl.$storage.autoRefresh" class="btn btn-default">
-  <fa name="{{ ctrl.$storage.autoRefresh ? 'pause' : 'play' }}"></fa> MàJ auto
-</button>
-</div>
+<refresh-panel
+  last-updated="ctrl.lastUpdated"
+  refresh-fn="ctrl.refreshStops()"
+  auto-refresh="ctrl.$storage.autoRefresh"></refresh-panel>
 </div>

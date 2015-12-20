@@ -9,15 +9,10 @@
     on-refreshed="ctrl.setLastUpdated(lastUpdated)"
   ></next-stops>
 
-  <hr>
-  <p>Dernière mise à jour : {{(ctrl.lastUpdated|date:"HH:mm:ss") || "---"}}</p>
-  <p>
-    <button ng-click="ctrl.refreshStops()" class="btn btn-primary"><fa name="refresh"></fa> Actualiser</button>
-    <button ng-click="ctrl.autoRefresh = !ctrl.autoRefresh" class="btn btn-default">
-      <fa name="{{ ctrl.autoRefresh ? 'pause' : 'play' }}"></fa> MàJ auto
-    </button>
-  </p>
-
+  <refresh-panel
+    last-updated="ctrl.lastUpdated"
+    refresh-fn="ctrl.refreshStops()"
+    auto-refresh="ctrl.autoRefresh"></refresh-panel>
 </div>
 <div ng-if="ctrl.stationDoesNotExist">
   <p>La station {{ctrl.station}} n'existe pas.</p>

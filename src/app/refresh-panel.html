@@ -1,0 +1,9 @@
+<div class="panel panel-default refresh-panel">
+<div class="panel-body">
+  <p>Dernière mise à jour : {{(refreshPanelCtrl.lastUpdated|date:"HH:mm:ss") || "---"}}</p>
+  <button ng-click="refreshPanelCtrl.refreshFn()" class="btn btn-primary"><fa name="refresh"></fa> Actualiser</button>
+  <button ng-click="refreshPanelCtrl.autoRefresh = !refreshPanelCtrl.autoRefresh" class="btn btn-default">
+    <fa name="{{ refreshPanelCtrl.autoRefresh ? 'pause' : 'play' }}"></fa> MàJ auto
+  </button>
+</div>
+</div>
