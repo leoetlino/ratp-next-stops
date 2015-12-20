@@ -33,6 +33,17 @@
   </div>
   <p><button type="submit" class="btn btn-info btn-block" ng-disabled="form.$invalid"><i class="fa fa-plus"></i> Ajouter</button></p>
 </form>
+
+<h3>Mise à jour des infos</h3>
+<div class="well">
+  <p class="text-info"><fa name="info-circle"></fa> Note : ces préférences ne s'appliquent qu'à l'accueil.</p>
+  <div class="checkbox">
+    <label><input type="checkbox" ng-model="ctrl.$storage.autoRefresh"> MàJ automatique</label>
+  </div>
+  <label for="interval">Intervalle de MàJ (en secondes)</label>
+  <input id="interval" type="number" ng-model="ctrl.$storage.autoRefreshInterval" min="5" max="60" class="form-control">
+</div>
+
 <hr>
 <p><a href="#/" class="btn btn-block btn-default"><i class="fa fa-home"></i> Accueil</a></p>
 <br>
