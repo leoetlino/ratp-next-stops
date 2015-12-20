@@ -1,4 +1,5 @@
-<h1 class="h2">Lignes</h1>
+<h1 class="h2 no-margin-top">Lignes</h1>
+
 <p><input ng-model="line" ng-model-options="{ debounce: 1000 }" type="text" class="form-control" bs-options="option.code as (option.code + ' − ' + option.name) for option in ctrl.lines" placeholder="Tapez le nom d'une ligne"></p>
 <div ng-show="ctrl.lineDetails">
   <h3 ng-style="{color: '#' + ctrl.lineDetails.color}">
@@ -21,7 +22,3 @@
     <p>La direction n'existe pas dans la base de données Navitia.io.</p>
   </div>
 </div>
-
-<hr>
-<p><a href="#/" class="btn btn-block btn-default"><i class="fa fa-home"></i> Accueil</a></p>
-<br>
