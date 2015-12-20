@@ -4,6 +4,7 @@ var app = angular.module("prochainsTrains", [
   "ngSanitize",
   "ngStorage",
   "mgcrea.ngStrap",
+  "picardy.fontawesome",
 ]);
 
 app.config(function ($routeProvider) {

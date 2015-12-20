@@ -1,4 +1,4 @@
-<h1 class="h2">Prochains trains RATP</h1>
+<h1 class="h2">Prochains passages</h1>
 
 <next-stops
   ng-repeat="station in ctrl.$storage.stations"
@@ -15,9 +15,10 @@
 <hr>
 <p>Dernière mise à jour : {{(ctrl.lastUpdated|date:"HH:mm:ss") || "---"}}</p>
 <p>
-  <button ng-click="ctrl.refreshStops()" class="btn btn-primary"><i class="fa fa-refresh"></i> Actualiser</button>
-  <button ng-show="ctrl.$storage.autoRefresh" ng-click="ctrl.$storage.autoRefresh = false" class="btn btn-default">No auto-update</button>
-  <button ng-show="!ctrl.$storage.autoRefresh" ng-click="ctrl.$storage.autoRefresh = true" class="btn btn-danger">Auto-update</button>
+  <button ng-click="ctrl.refreshStops()" class="btn btn-primary"><fa name="refresh"></fa> Actualiser</button>
+  <button ng-click="ctrl.$storage.autoRefresh = !ctrl.$storage.autoRefresh" class="btn btn-default">
+    <fa name="{{ ctrl.$storage.autoRefresh ? 'pause' : 'play' }}"></fa> MàJ auto
+  </button>
   <a class="btn btn-default" href="/#/settings"><i class="fa fa-cogs"></i></a>
   <a class="btn btn-info" href="/#/lines">Lignes</a>
 </p>

@@ -1,4 +1,5 @@
 <h1 class="h2">Prochains passages</h1>
+
 <h3 ng-style="{color: '#' + ctrl.lineDetails.color}">Ligne {{ctrl.line}}</h3>
 <div ng-if="!ctrl.stationDoesNotExist">
   <next-stops
@@ -9,11 +10,12 @@
   ></next-stops>
 
   <hr>
-  <p>Dernière mise à jour : {{(ctrl.lastUpdated|date:"HH:mm:ss") || "(jamais)"}}</p>
+  <p>Dernière mise à jour : {{(ctrl.lastUpdated|date:"HH:mm:ss") || "---"}}</p>
   <p>
-    <button ng-click="ctrl.refreshStops()" class="btn btn-primary"><i class="fa fa-refresh"></i> Actualiser</button>
-    <button ng-show="ctrl.autoRefresh" ng-click="ctrl.autoRefresh = false" class="btn btn-default">No auto-update</button>
-    <button ng-show="!ctrl.autoRefresh" ng-click="ctrl.autoRefresh = true" class="btn btn-danger">Auto-update</button>
+    <button ng-click="ctrl.refreshStops()" class="btn btn-primary"><fa name="refresh"></fa> Actualiser</button>
+    <button ng-click="ctrl.autoRefresh = !ctrl.autoRefresh" class="btn btn-default">
+      <fa name="{{ ctrl.autoRefresh ? 'pause' : 'play' }}"></fa> MàJ auto
+    </button>
   </p>
 
 </div>
