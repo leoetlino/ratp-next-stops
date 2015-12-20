@@ -1,19 +1,9 @@
-angular.module("prochainsTrains").factory("RatpService", function ($http) {
+angular.module("prochainsTrains").factory("RatpService", function ($http, normaliseName) {
   const API_ENDPOINT = "https://ratp-api.leolam.fr/api";
 
   let cache = {};
 
-  let slugify = (string) => {
-    if (!string) {
-      return "";
-    }
-    return string.toString().toLowerCase()
-      .replace(/\s+/g, "-")
-      .replace(/[^\w\-]+/g, "-")
-      .replace(/\-\-+/g, "-")
-      .replace(/^-+/, "")
-      .replace(/-+$/, "");
-  };
+  let slugify = (string) => normaliseName.normalise(string);
 
   let query = (path, useCache) => {
     let url = API_ENDPOINT + path;
