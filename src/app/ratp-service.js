@@ -5,7 +5,7 @@ angular.module("prochainsTrains").factory("RatpService", function ($http, normal
 
   let slugify = (string) => normaliseName.normalise(string);
 
-  let query = (path, useCache) => {
+  let query = (path, { useCache = false, retryOn503 = true } = {}) => {
     let url = API_ENDPOINT + path;
     if (useCache && cache[url]) {
       return cache[url];
@@ -18,8 +18,8 @@ angular.module("prochainsTrains").factory("RatpService", function ($http, normal
         if (response.status === 404) {
           return Promise.reject("Not found");
         }
-        if (response.status === 503) {
-          return query(path, useCache);
+        if (response.status === 503 && retryOn503) {
+          return query(path, { useCache, retryOn503: false });
         }
         return Promise.reject("Unexpected error");
       });
@@ -36,19 +36,19 @@ angular.module("prochainsTrains").factory("RatpService", function ($http, normal
         "/" + slugify(stationName));
     },
     getStations(lineCode) {
-      return query("/stations/line-" + lineCode, true);
+      return query("/stations/line-" + lineCode, { useCache: true });
     },
     getStationsOnDirection(lineCode, direction) {
-      return query(`/stations/line-${lineCode}/${direction}`, true);
+      return query(`/stations/line-${lineCode}/${direction}`, { useCache: true });
     },
     getLines() {
-      return query("/lines", true);
+      return query("/lines", { useCache: true });
     },
     getLineDetails(lineCode) {
-      return query("/lines/" + lineCode, true);
+      return query("/lines/" + lineCode, { useCache: true });
     },
     getDirections(lineCode) {
-      return query("/directions/line-" + lineCode, true);
+      return query("/directions/line-" + lineCode, { useCache: true });
     },
   };
 });
