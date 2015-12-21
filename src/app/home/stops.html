@@ -1,0 +1,19 @@
+<h1 class="h2 no-margin-top">Prochains passages</h1>
+
+<next-stops
+  ng-repeat="station in ctrl.$storage.stations"
+  station="station"
+  auto-refresh="ctrl.$storage.autoRefresh"
+  auto-refresh-interval="ctrl.$storage.autoRefreshInterval"
+  on-refreshed="ctrl.setLastUpdated(lastUpdated)"
+></next-stops>
+
+<div ng-show="!ctrl.$storage.stations.length" class="alert alert-info">
+<p>Aucune station à vérifier.</p>
+</div>
+
+<refresh-panel
+  last-updated="ctrl.lastUpdated"
+  refresh-fn="ctrl.refreshStops()"
+  auto-refresh="ctrl.$storage.autoRefresh"></refresh-panel>
+</div>

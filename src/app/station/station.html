@@ -1,0 +1,19 @@
+<h1 class="h2">Prochains passages</h1>
+
+<h3 ng-style="{color: '#' + ctrl.lineDetails.color}">Ligne {{ctrl.line}}</h3>
+<div ng-if="!ctrl.stationDoesNotExist">
+  <next-stops
+    ng-repeat="station in ctrl.stopAreas"
+    station="station"
+    auto-refresh="ctrl.autoRefresh"
+    on-refreshed="ctrl.setLastUpdated(lastUpdated)"
+  ></next-stops>
+
+  <refresh-panel
+    last-updated="ctrl.lastUpdated"
+    refresh-fn="ctrl.refreshStops()"
+    auto-refresh="ctrl.autoRefresh"></refresh-panel>
+</div>
+<div ng-if="ctrl.stationDoesNotExist">
+  <p>La station {{ctrl.station}} n'existe pas.</p>
+</div>

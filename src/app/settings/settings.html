@@ -1,4 +1,4 @@
-<h1 class="h2">Paramètres</h1>
+<h1 class="h2 no-margin-top">Paramètres</h1>
 
 <h3>Stations à vérifier</h3>
 <ul class="list-group" ng-show="ctrl.$storage.stations.length">
@@ -13,7 +13,7 @@
 <p ng-show="!ctrl.$storage.stations.length" class="text-info">Aucune station à vérifier.</p>
 
 <h3>Ajouter une station</h3>
-<form ng-submit="ctrl.addStation(line, direction, station)" name="form">
+<form ng-submit="ctrl.addStation(line, direction, station)" name="form" class="well">
   <div class="form-group">
     <label for="line">Ligne</label>
     <input id="line" ng-model="line" type="text" class="form-control" bs-options="option.code as (option.code + ' − ' + option.name) for option in ctrl.lines" placeholder="Tapez le nom d'une ligne" >
@@ -33,6 +33,14 @@
   </div>
   <p><button type="submit" class="btn btn-info btn-block" ng-disabled="form.$invalid"><i class="fa fa-plus"></i> Ajouter</button></p>
 </form>
-<hr>
-<p><a href="#/" class="btn btn-block btn-default"><i class="fa fa-home"></i> Accueil</a></p>
-<br>
+
+<h3>Mise à jour des infos</h3>
+<div class="well">
+  <p class="text-info"><fa name="info-circle"></fa> Note : ces préférences ne s'appliquent qu'à l'accueil.</p>
+  <div class="checkbox">
+    <label><input type="checkbox" ng-model="ctrl.$storage.autoRefresh"> MàJ automatique</label>
+  </div>
+  <label for="interval">Intervalle de MàJ (en secondes)</label>
+  <input id="interval" type="number" ng-model="ctrl.$storage.autoRefreshInterval" min="5" max="60" class="form-control">
+</div>
+
