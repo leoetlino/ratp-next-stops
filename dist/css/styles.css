@@ -2,6 +2,20 @@ body {
     padding-bottom: 20px;
 }
 
+@media (min-width: 640px) {
+    .navbar-nav {
+        float: left;
+        margin: 0;
+    }
+    .navbar-nav > li {
+        float: left;
+    }
+    .navbar-nav > li > a {
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+}
+
 [ng-cloak] { display: none; }
 
 .stop {
