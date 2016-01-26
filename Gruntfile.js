@@ -264,7 +264,7 @@ module.exports = function(grunt) {
           preferOnline: true,
           timestamp: true,
           cache: [
-            "fonts/fontawesome-webfont.woff2?v=4.3.0",
+            "fonts/fontawesome-webfont.woff2?v=4.5.0",
           ]
         },
         src: [
