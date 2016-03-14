@@ -12,11 +12,21 @@
       <li ng-repeat="direction in ctrl.directions"><a href="/#/lines/{{ctrl.lineDetails.code}}/{{direction.normalisedName}}">{{direction.name}}</a></li>
     </ul>
   </div>
+  <div class="checkbox" ng-show="ctrl.direction">
+    <label><input type="checkbox" ng-model="ctrl.showNextStopsForAll"> Afficher les prochains arrêts</label>
+  </div>
   <div ng-show="ctrl.stations">
     <h4>Stations</h4>
-    <ul class="object-list">
+    <ul class="object-list" ng-if="!ctrl.showNextStopsForAll">
       <li ng-repeat="station in ctrl.stations"><a href="/#/stations/line-{{ctrl.lineDetails.code}}/{{station.name}}">{{station.name}}</a></li>
     </ul>
+    <next-stops
+      ng-if="ctrl.direction && ctrl.showNextStopsForAll"
+      ng-repeat="station in ctrl.stations"
+      station="{line: ctrl.lineDetails.code, direction: ctrl.direction, name: station.name}"
+      auto-refresh="true"
+      auto-refresh-interval="15"
+    ></next-stops>
   </div>
   <div ng-show="ctrl.directionDoesNotExist">
     <p>La direction n'existe pas dans la base de données Navitia.io.</p>
