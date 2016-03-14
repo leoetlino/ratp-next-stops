@@ -4,6 +4,8 @@ angular.module("prochainsTrains").controller("LinesCtrl", function (
   $routeParams,
   $location) {
 
+  this.showNextStopsForAll = false;
+  this.direction = $routeParams.direction;
   this.lines = [];
   RatpService.getLines().then((lines) => {
     this.lines = lines;
