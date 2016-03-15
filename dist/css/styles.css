@@ -8,12 +8,12 @@ body {
     background: black;
 }
 
-.text-danger {
-    color: #F44336;
-}
-
 .text-warning {
     color: #FFC107;
+}
+
+.text-danger {
+    color: #F44336;
 }
 
 .text-info {
