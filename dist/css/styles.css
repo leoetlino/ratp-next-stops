@@ -1,5 +1,27 @@
 body {
     padding-bottom: 20px;
+    background: black;
+    color: white;
+}
+
+.panel, .list-group-item, .well {
+    background: black;
+}
+
+.text-danger {
+    color: #F44336;
+}
+
+.text-warning {
+    color: #FFC107;
+}
+
+.text-info {
+    color: #2196F3;
+}
+
+.text-success {
+    color: #4CAF50;
 }
 
 @media (min-width: 360px) {
