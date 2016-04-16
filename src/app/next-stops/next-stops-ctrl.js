@@ -1,5 +1,6 @@
 angular.module("prochainsTrains").controller("NextStopsCtrl", function (
   RatpService,
+  normaliseName,
   $interval,
   $scope
 ) {
@@ -12,7 +13,8 @@ angular.module("prochainsTrains").controller("NextStopsCtrl", function (
   };
 
   this.shouldShowDestination = () => {
-    return this.stops.every(stop => stop.destination === this.station.direction);
+    const normalisedDirection = normaliseName.normalise(this.station.direction);
+    return this.stops.every(stop => normaliseName.normalise(stop.destination) === normalisedDirection);
   };
 
   // Get stops and assign them to this.stops.
