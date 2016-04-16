@@ -24,6 +24,12 @@ body {
     color: #4CAF50;
 }
 
+.destination,
+.text-muted,
+h1 small, h2 small, h3 small {
+    color: #999 !important;
+}
+
 @media (min-width: 360px) {
     .navbar-nav {
         float: left;
@@ -53,7 +59,6 @@ time {
     font-size: 20px;
 }
 .destination {
-    color: gray;
     font-size: 13px;
 }
 

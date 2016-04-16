@@ -10,7 +10,7 @@ angular.module("prochainsTrains").factory("RatpService", function ($http, normal
     if (useCache && cache[url]) {
       return cache[url];
     }
-    let promise = $http.get(url)
+    let promise = $http.get(url, { timeout: 5000 })
       .then(res => {
         return res.data;
       }, (response) => {
