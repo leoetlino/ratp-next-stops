@@ -37,6 +37,7 @@ angular.module("prochainsTrains").controller("LinesCtrl", function (
     }
   });
 
+  this.autoRefresh = true;
   this.refreshStops = () => {
     $scope.$broadcast("NextStopsCtrl::refreshStops");
   };
