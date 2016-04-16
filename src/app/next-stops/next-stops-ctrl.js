@@ -11,6 +11,10 @@ angular.module("prochainsTrains").controller("NextStopsCtrl", function (
     return this.stops.every(stop => stop.destination === this.stops[0].destination);
   };
 
+  this.shouldShowDestination = () => {
+    return this.stops.every(stop => stop.destination === this.station.direction);
+  };
+
   // Get stops and assign them to this.stops.
   let getStops = () => {
     if (this.station.disabled) {
