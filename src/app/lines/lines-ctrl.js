@@ -37,4 +37,11 @@ angular.module("prochainsTrains").controller("LinesCtrl", function (
     }
   });
 
+  this.refreshStops = () => {
+    $scope.$broadcast("NextStopsCtrl::refreshStops");
+  };
+  this.setLastUpdated = (lastUpdated) => {
+    this.lastUpdated = lastUpdated;
+  };
+
 });

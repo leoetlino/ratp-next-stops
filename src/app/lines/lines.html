@@ -22,9 +22,15 @@
       ng-if="ctrl.direction && ctrl.showNextStopsForAll"
       ng-repeat="station in ctrl.stations"
       station="{line: ctrl.lineDetails.code, direction: ctrl.direction, name: station.name}"
-      auto-refresh="true"
+      auto-refresh="ctrl.autoRefresh"
       auto-refresh-interval="15"
+      on-refreshed="ctrl.setLastUpdated(lastUpdated)"
     ></next-stops>
+    <refresh-panel
+      ng-if="ctrl.direction && ctrl.showNextStopsForAll"
+      last-updated="ctrl.lastUpdated"
+      refresh-fn="ctrl.refreshStops()"
+      auto-refresh="ctrl.autoRefresh"></refresh-panel>
   </div>
   <div ng-show="ctrl.directionDoesNotExist">
     <p>La direction n'existe pas dans la base de données Navitia.io.</p>
